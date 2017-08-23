@@ -1,16 +1,62 @@
 //Exercise 1
 var names = ['Lars', 'Jan', 'Peter', 'Bo', 'Frederik'];
-
+//long, seperated version:
+//First define the function
 function threeOrLess(name){
     return name.length <= 3;
 }
+
 var shortNames = names.filter(threeOrLess);
 console.log(shortNames);
 
+//Short version with callback:
+var shortNames2 = names.filter(function(name){
+    if(name.length <= 3){
+        return name; 
+    }
+}); 
+console.log(shortNames2);
+
+//Uppercase using map:
 var UpperNames = names.map(function(name){
     return name.toUpperCase();
 })
-
 console.log(UpperNames);
 
-//Ex 2
+
+//Exercise 4:
+//Create a Unordered list of names (see line 2) using a map function. 
+var html = names.map(function(name){
+        return "<li>" + name + "</li>";
+}).join("");
+document.getElementById("indhold").innerHTML = html;
+
+// Initializing contactlist.
+var contactList = [
+    {name:"Lars",phone:"1234567"},
+    {name:"Peter",phone:"675843"}, 
+    {name:"Jan",phone:"98547112"}, 
+    {name:"Bo",phone:"11179345"}
+];
+//Here we convert the contactlist into a tabel.
+var contactListTabel = contactList.map(function(person) {
+    return "<tr><td>" + person.name + "</td><td>" + person.phone + "</td></tr>"
+}).join("");
+document.getElementById("tab").innerHTML= contactListTabel;
+
+//ES6
+//var shortNameList = contactList.filter(person = person.name.length <= 3);
+//ES5
+var shortNameList = contactList.filter(function(person){
+    if(person.name.length <= 3){ 
+        return person;
+    } 
+});
+
+//This function is used when a user push the button.
+function myFunc(){
+    var shortNameTabel = shortNameList.map(function(person) {
+        return "<tr><td>" + person.name + "</td><td>" + person.phone + "</td></tr>"
+    }).join("");
+    document.getElementById("tab").innerHTML= shortNameTabel;
+}
