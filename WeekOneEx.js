@@ -23,6 +23,35 @@ var UpperNames = names.map(function(name){
 })
 console.log(UpperNames);
 
+//Exercise 2:
+//MyFilter
+function myFilter(arr, callback){
+    var unfilteredArr = new Array();
+    for (var i = 0; i <= arr.length-1; i++){
+        unfilteredArr[i] = callback(arr[i]);
+    }
+    //
+    var filteredArr = new Array();
+    for (var j = 0; j < unfilteredArr.length-1; j++) {
+        var element = unfilteredArr[j];
+        if(element !== undefined){
+            filteredArr.push(unfilteredArr[j]);
+        }
+    }
+    return filteredArr;
+ }
+ var myFilt = myFilter(names, function(name){
+   if (name.length <= 3) {
+       return name;
+   }
+ })
+ console.log('------------------------------------');
+ console.log("Official filter result:");
+ console.log(shortNames);
+ console.log('------------------------------------');
+ console.log("MyFilter Result"); 
+ console.log(myFilt);
+ console.log('------------------------------------');
 
 //Exercise 4:
 //Create a Unordered list of names (see line 2) using a map function. 
@@ -60,3 +89,5 @@ function myFunc(){
     }).join("");
     document.getElementById("tab").innerHTML= shortNameTabel;
 }
+
+        ///////////////////// Work Space /////////////////////
