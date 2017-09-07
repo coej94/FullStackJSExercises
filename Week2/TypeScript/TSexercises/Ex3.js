@@ -29,6 +29,8 @@ var Book = /** @class */ (function () {
 }());
 var Quack = new Book("QuackBook Pro", "Donald Quack", getDate(), 1234);
 Quack.book_info();
+//IT WORKS! We still have some problems with Date => String because we dont want
+//the ugly time format Date() gives us - else everything is just fine. 
 //This function gives us a clener format of the date of to day.
 //TS will complain because we are converting the date into a string, 
 //but the interface expects a Date. (No idea how to get the string back 

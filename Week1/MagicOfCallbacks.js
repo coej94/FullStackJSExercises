@@ -1,6 +1,6 @@
 
 //Exercise 1
-var names = ['Lars', 'Jan', 'Peter', 'Bo', 'Frederik'];
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
 //long, seperated version:
 //First define the function
 function threeOrLess(name){
@@ -8,7 +8,7 @@ function threeOrLess(name){
 }
 
 var shortNames = names.filter(threeOrLess);
-console.log(shortNames);
+console.log(`Short names without callback: [${shortNames}]`); //For some reason the brackets disappear when put in a string.
 
 //Short version with callback:
 var shortNames2 = names.filter(function(name){
@@ -17,7 +17,7 @@ var shortNames2 = names.filter(function(name){
     }
     return false;
 }); 
-console.log(shortNames2);
+console.log(`Short names with callback: [${shortNames2}]`);
 
 //Uppercase using map:
 var UpperNames = names.map(function(name){
@@ -29,6 +29,32 @@ console.log(UpperNames);
 /////////////////////////////////////////////////////////////////////////////////////
 
 //Exercise 2:
+let ofFilter = names.filter(name => name.length <= 3);
+
+//myFilter
+//We use the variable "names" from ex1.
+function myFilter(array, callback) {
+    var filteredArray = [];
+    array.forEach(function(info) {
+        if(callback(info)) {
+            filteredArray.push(info);
+        }
+    });
+    return filteredArray;
+}
+
+ let hejFilter = myFilter(names, function(el) {
+        if (el.length <= 3) return el;
+ });
+
+ console.log('------------------------------------');
+ console.log("official Filter");
+ console.log(ofFilter);
+ console.log('------------------------------------');
+ console.log("myFilter");
+ console.log(hejFilter);
+ console.log('------------------------------------');
+
 
  //myMap:
  
@@ -60,7 +86,6 @@ console.log(UpperNames);
  console.log('------------------------------------');
 
 /////////////////////////////////////////////////////////////////////////////////////
-
 
 //Exercise 4:
 //Create a Unordered list of names (see line 2) using a map function. 
@@ -99,37 +124,3 @@ function myFunc(){
     }).join("");
     document.getElementById("tab").innerHTML= shortNameTabel;
 }
-
-        ///////////////////// Work Space /////////////////////
-
-        /*//MyFilter
-function myFilter(arr, callback){
-    //var unfilteredArr = new Array();
-    var filteredArr = new Array();
-    arr.forEach(function(element) {
-        if (callback() = true) {
-            filteredArr.push(element);
-        }
-    })
-    // for (var j = 0; j < unfilteredArr.length-1; j++) {
-    //     var element = unfilteredArr[j];
-    //     if(element !== undefined){
-    //         filteredArr.push(unfilteredArr[j]);
-    //     }
-    // }
-    return filteredArr;
- };
-
- var myFilt = myFilter(names, function(name){
-   if (name.length <= 3) {
-       return name;
-   }
- });
- console.log('------------------------------------');
- console.log("Official filter result:");
- console.log(shortNames);
- console.log('------------------------------------');
- console.log("MyFilter Result"); 
- console.log(myFilt);
- console.log('------------------------------------');
- */
