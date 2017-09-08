@@ -303,3 +303,191 @@ console.log('------------------------------------');
     }
 
     module.exports = Person;
+```
+>## ES6-7 and TypeScript
+- Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, de-structuring assignments, maps/sets etc.
+## See week2 folder for exercise sheet - then the answers will make sense.
+### ArrowFunction =>
+```javascript
+let evens = [0,2,4,6,8];
+let odds = evens.map(v =>  v+1);
+
+console.log('------------------------------------');
+console.log(`Evens: ${evens}`);
+console.log(`Odds: ${odds}`);
+console.log('------------------------------------');
+```
+
+## ArrowFunction and This problem:
+```javascript
+//Exercise 3:
+// a)
+//One way with the old function
+function Numbers(numbs) {
+    this.nums = numbs;
+    this.fives = []; 
+    let hej = this;
+    this.nums.forEach(function(v){
+        if (v % 5 === 0) { 
+            hej.fives.push(v);
+        } 
+    });
+};
+var numbers = new Numbers([1,3,5,10,14,20,33,50]); 
+console.log('------------------------------------');
+console.log(numbers.fives);
+console.log('------------------------------------');
+
+//another way with the arrow Function. Arrow functions are not always gods gift to humanity.
+//See "Arrow Confusion"
+function Numbers(numbs) {
+    this.nums = numbs;
+    this.fives = []; 
+    this.nums.forEach((v) => {
+        if (v % 5 === 0) { 
+            this.fives.push(v);
+        } 
+    });
+};
+var numbers = new Numbers([1,3,5,10,14,20,33,50]); 
+console.log(numbers.fives);
+
+// b)
+//Function way
+console.log('------------------------------------');
+console.log(`Old fasioned function way`);
+console.log('------------------------------------');
+var counter = {
+    count: 0,
+    inc: function () {
+      this.count++;
+    }
+  }
+var func = counter.inc; //Store "reference" to inc
+func();
+console.log(`First result: ${counter.count}`); //Still zero
+counter.inc();
+console.log(`Second result: ${counter.count}`); //Now one
+
+
+// Arrow way
+console.log('------------------------------------');
+console.log(`Arrow function way`);
+console.log('------------------------------------');
+var counter = {
+    count: 0,
+    inc: () => {
+      this.count++;
+    }
+  }
+var func = counter.inc; //Store "reference" to inc
+func();
+console.log(`First result: ${counter.count}`); //Still zero
+counter.inc();
+console.log(`Second result: ${counter.count}`); //and still zero.
+
+```
+## Template iterals.
+```javascript
+var customer = { name: "Foo" }
+var card = { amount: 7, product: "Bar", unitprice: 42 }
+var message = `Hello ${customer.name},
+want to buy ${card.amount} ${card.product} for
+a total of ${card.amount * card.unitprice} bucks?`
+console.log('------------------------------------');
+console.log(message);
+console.log('------------------------------------');
+```
+
+## Rest operator
+```javascript
+console.log(`Exercise 5
+a)`);
+function f(x,y,...rest){ 
+    console.log(`sum: ${rest.length}`);
+    rest.forEach((item, index) => console.log(`rest value ${index+1} is a ${item.constructor.name}`));
+}
+console.log(f(5,2,true,2,"hello World",[1,2,3],new Date(),{}));
+
+console.log("b)");
+//To test it works!
+var rest = [true,2,"hello World",[1,2,3],new Date(),{}]; 
+var restParams = [ ...rest]; 
+console.log(f(5,2,...restParams));
+```
+
+## Shorthand notation:
+```javascript
+Shorthand notation
+console.log("exercise 6:");
+//Initializing
+let fName = "Kurt";
+let lName = "Wonnegut";
+let age = 98
+
+//this is easier to write instead of "this.fname = fname etc.."
+let man = {
+    fName: fName,
+    lName: lName,
+    age: age
+};
+
+//This line shows us the two ways we can acces the variables of our object.
+console.log('------------------------------------');
+console.log(`Mr. ${man['fName']} ${man.lName} is ${man.age} years old!`);  
+console.log('------------------------------------');
+```
+## Destructing assignment:
+```javascript
+  
+//a)
+let fName1 = "Kurt", lName1 = "Wonnegut";
+[fName1, lName1]=[lName1, fName1];
+
+console.log(`First: ${fName1}, Last: ${lName1}`);
+
+
+//b)
+function getPerson(){
+    return {
+      firstName: "Kurt",
+      lastName: "Wonnegut",
+      gender : "Male",
+      email: "kurt@wonnegut.dk",
+      phone: "12345",
+    }
+}
+//I'm stuck with this one - Moving further.
+let lastnameAndPhone = {lastName: getPerson["lastName"],phone: getPerson.phone}
+
+console.log('------------------------------------');
+console.log(lastnameAndPhone);
+console.log('------------------------------------');
+```
+
+- Explain and demonstrate how es2015 supports modules (import and export) similar to what is offered by NodeJS.
+Es2015 module import and export example:
+
+Export.
+```
+//------ lib.js ------
+    export const sqrt = Math.sqrt;
+    export function square(x) {
+        return x * x;
+    }
+    export function diag(x, y) {
+        return sqrt(square(x) + square(y));
+    }
+```
+Import.
+```
+//------ main.js ------
+    import { square, diag } from 'lib';
+    console.log(square(11)); // 121
+    console.log(diag(4, 3)); // 5
+```
+- Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
+
+
+- Provide examples with es6, running in a browser, using Babel and Webpack
+- Provide an number of examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics
