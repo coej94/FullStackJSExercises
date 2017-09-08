@@ -30,3 +30,10 @@ function Car(make,model) {
 }
 var car = new Car("Volvo","V70");
 car.show(); //undefined, undefined
+
+//In java "this"'s scope is global: 
+private String name = "Christian";
+public void setName(String name){
+  /*Name points to the argument in the "setName method->*/ name = this.name; 
+  //this.name points to the global "name" variable in java. 
+}
