@@ -169,8 +169,7 @@ Vi giver variablen `scope` værdien `"I am global"` i det globale scope, og `"I 
 ```
 
 #### Example (JavaScript Module Pattern):
-Here we create a module that can return a greet to a certain person with the `greeting()` function, by passing in the name:
-Her laver vi et modul som kan retunere en hilsen til en bestemt person med greeting() funktionen. Dette sker ved at give et navn med.
+Her laver vi et modul som kan retunere en hilsen til en bestemt person med `greeting()` funktionen. Dette sker ved at give et navn med.
 ```javascript
     function greeter(name) {
         var name = name;
@@ -182,7 +181,7 @@ Her laver vi et modul som kan retunere en hilsen til en bestemt person med greet
         }
     }
 
-    console.log(greeter("Christian").greet());
+    console.log(greeter("Christian").greeting());
 ```
 - Immediately-Invoked Function Expressions (IIFE)
 - JavaScripts Prototype
@@ -200,12 +199,11 @@ Her laver vi et modul som kan retunere en hilsen til en bestemt person med greet
 ```
 - User defined Callback Functions
 ```javascript 
-
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
 //Official filter:
 let ofFilter = names.filter(name => name.length <= 3);
 
 //myFilter
-var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
 function myFilter(array, callback) {
     var filteredArray = [];
     array.forEach(function(input) {
@@ -260,10 +258,17 @@ function myFilter(array, callback) {
 ```
 - Explain the methods map, filter and reduce
 ```javascript
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
+//Filter
+let Filter = names.filter(name => name.length <= 3); //returns [Jan, Bo, Ib]
 
+//Map
+var upperNames = names.map(function(name){
+    return name.toUpperCase(); //Returns [ 'LARS','JAN','PETER','BO','FREDERIK','CHRISTIAN','IB','THOMAS' ]
+ }) 
+  
 //Reduce
 var numbers = [1,2,3];
-
 function getSum(total, num) {
     return total+num;
 }
@@ -275,3 +280,26 @@ console.log('------------------------------------');
 
 ```
 - Provide examples of user defined reusable modules implemented in Node.js
+
+```javascript
+    function Person(name, age) {
+        var name = name;
+        var age = age;
+
+        return {
+            setName: function(value) {
+                name = value;
+            },
+            setAge: function(value) {
+                age = value;
+            },
+            getInfo: function() {
+                return {
+                    name: name,
+                    age: age
+                }
+            }
+        };
+    }
+
+    module.exports = Person;
