@@ -22,3 +22,10 @@ anotherFunction = function(d: string, e: string, f: string) {
 }
 
 console.log(anotherFunction("hej", "med", "dig"));
+
+let f2 = function logger(f1: myFunc){
+    let [a, b, c] = ["A", "B", "C"];
+    console.log(f1(a,b,c));
+}
+
+console.log();
