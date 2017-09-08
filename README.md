@@ -46,13 +46,13 @@ Node er en eventbaseret, asynkron I/O serverside platform som kører på Googles
 
 Node er ikke skrevet i JavaScript, som mange tror, men er derimod skrevet i C, hvilket er en af grundene til at det er så hurtigt. Selvom Node kører flertrådede processer under motorhjelmen, er det ikke en mulighed for brugeren af node. På overfladen kører node ”single-treaded” processer med callback funktioner. Dette kommer vi tilbage til senere.
 
-## Pros and cons:
-## # Pros:
+### Pros and cons:
+### Pros:
 -	God håndtering af concurrency ved hjælp af asynkront eventdriven I/O
 -	Gør det muligt at bruge javascript til både frontend og backend udvikling.
 -	Gør det muligt at bruge NPM – Node Package Manager.
 -	Stort Community og bred support og en masse kode er frit tilgængeligt i Opensource moduler.
-## # Cons:
+### Cons:
 -	Det er noget rod når man skal arbejde med relationelle databaser.
 -	Nested callbacks kan gøre koden uoverskuelig.
 -	Det kræver en bred forståelse af javascript.
@@ -71,3 +71,235 @@ Babel er en transpiler, som laver ES6 kode om til ES5 kode, så alle browsere ka
 Webpack er en bundler, som samler javascript filer til brug i browser. Den er i stand til at bundle mange forskellige filer som ES moduler, commonJS og AMD. Webpack kan endda sættes til at loade forskellige dele af pakken asynkront. På den måde sløver man ikke loadtiden, når webappen skal hentes. Grunden til at man pakker det hele sammen til en fil, er at man på den måde mindsker mængeden af requests som skal udføres.
 Explain the purpose of “use strict” and also Linters, exemplified with ESLint
 Use strict og linters er til for at beskytte os mod os selv. De advarer os når vores syntax er forkert eller regner ud at det vi har skrevet måske ikke er det mener. På den måde hæver det vores kvaliteten af vores kode. Selvom det kan virke besværligt og tidskrævende at bruge ”use strict” kan det i sidste ende spare os en masse tid som vi ellers ville bruge på at debugge.
+
+>## Variable/function-Hoisting:
+```javascript 
+console.log("Ex1:");
+x = 5;
+console.log('------------------------------------');
+console.log("x should be 5, eventough it's not declared yet.");
+console.log("x is:" + x);
+console.log('------------------------------------');
+var x;
+console.log('------------------------------------');
+
+//Hoisting ex2: Initialization
+console.log("Ex2:");
+console.log('------------------------------------');
+console.log("y is NOT initialized yet - y is : " + y);
+console.log('------------------------------------');
+var y = 69;
+console.log('------------------------------------');
+console.log("Now we have initialized y, so y is now: " + y);
+console.log('------------------------------------');
+```
+```
+OUTPUT: 
+Ex1:
+------------------------------------
+x should be 5, eventough it's not declared yet.
+x is:5
+------------------------------------
+------------------------------------
+Ex1:
+------------------------------------
+y is NOT initialized yet - y is : undefined
+------------------------------------
+------------------------------------
+Now we have initialized y, so y is now: 69
+------------------------------------
+```
+>## this in JavaScript and how it differs from what we know from Java/.net.
+```javascript
+/**
+ * A function's this keyword behaves a little differently in JavaScript compared to other 
+ * languages. In most cases, the value of this is determined by how a function is called. 
+ * It can't be set by assignment during execution, and it may be different each time the 
+ * function is called.
+*/
+
+console.log('------------------------------------');
+console.log("This Explained:");
+console.log('------------------------------------');
+
+// Example 1 (Global Context):
+// In the global execution context (outside of any function),
+// this refers to the global object, whether in strict mode or not.
+console.log(this.document === document); // true
+
+// In web browsers, the window object is also the global object:
+console.log(this === window); // true
+
+this.a = 37;
+console.log(window.a); // 37
+//Example 2 (Shadowing this):
+
+function Car(make,model) {
+  this.make = make;
+  this.model = model;
+  this.show = function(){setTimeout(function(){ //This function gets it's own "this"
+    console.log(this.make + ", " + this.model);
+  },0)};
+}
+var car = new Car("Volvo","V70");
+car.show(); //undefined, undefined
+```
+```java
+//In java "this"'s scope is global: 
+private String name = "Christian";
+public void setName(String name){
+  name = this.name; /*name points to the argument in the "setName method*/ 
+  //this.name points to the global "name" variable in java. 
+}
+```
+
+>## Function Closures and the JavaScript Module Pattern
+When using function closures, the idea is often to make a function available inside a particular scope only.
+
+#### Example (Closure):
+Vi giver variablen `scope` værdien `"I am global"` i det globale scope, og `"I am just a local"` i `getScope()`'s scope. 
+```javascript
+    var scope = "I am global";
+    function getScope() {
+        var scope = "I am local";
+        return scope;
+    }
+    console.log(getScope());
+    console.log(scope);
+```
+
+#### Example (JavaScript Module Pattern):
+Her laver vi et modul som kan retunere en hilsen til en bestemt person med `greeting()` funktionen. Dette sker ved at give et navn med.
+```javascript
+    function greeter(name) {
+        var name = name;
+
+        return {
+            greeting: function() {
+                return "Hi " + name;
+            }
+        }
+    }
+
+    console.log(greeter("Christian").greeting());
+```
+- Immediately-Invoked Function Expressions (IIFE)
+- JavaScripts Prototype
+```javascript
+  //Creating a prototype
+  function Person(firstName, lastName, age) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+  }
+  
+  var person1 = new Person("Christian", "Jacobsen", 23);
+  var person2 = new Person("Thomas", "Staal", 23);
+  var person3 = new Person("Master", "Yi", 90);
+```
+- User defined Callback Functions
+```javascript 
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
+//Official filter:
+let ofFilter = names.filter(name => name.length <= 3);
+
+//myFilter
+function myFilter(array, callback) {
+    var filteredArray = [];
+    array.forEach(function(input) {
+        if(callback(input)) {
+            filteredArray.push(input);
+        }
+    });
+    return filteredArray;
+}
+
+ let hejFilter = myFilter(names, function(el) {
+        if (el.length <= 3) return el;
+ });
+
+ console.log('------------------------------------');
+ console.log("official Filter");
+ console.log(ofFilter);
+ console.log('------------------------------------');
+ console.log("myFilter");
+ console.log(hejFilter);
+ console.log('------------------------------------');
+
+
+ //myMap:
+ 
+ //Uppercase using map:
+ var upperNames = names.map(function(name){
+    return name.toUpperCase();
+ })
+ // ES6 way:
+ //var upperNames = number.map(name => name.toUpperCase());
+ 
+ function myMap(arr, callback) {
+     var temp = [];
+     for (var i = 0; i < arr.length; i++) {
+         temp[i] = callback(arr[i]);
+     }
+     return temp;
+ }
+ 
+ var myUpperNames = myMap(names, function (name) {
+     return name.toUpperCase();
+ })
+ 
+ console.log('------------------------------------');
+ console.log("official map");
+ console.log(upperNames);
+ console.log('------------------------------------');
+ console.log("myMap");
+ console.log(myUpperNames);
+ console.log('------------------------------------');
+```
+- Explain the methods map, filter and reduce
+```javascript
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
+//Filter
+let Filter = names.filter(name => name.length <= 3); //returns [Jan, Bo, Ib]
+
+//Map
+var upperNames = names.map(function(name){
+    return name.toUpperCase(); //Returns [ 'LARS','JAN','PETER','BO','FREDERIK','CHRISTIAN','IB','THOMAS' ]
+ }) 
+  
+//Reduce
+var numbers = [1,2,3];
+function getSum(total, num) {
+    return total+num;
+}
+
+console.log('------------------------------------');
+console.log("[1,2,3] is now reduced to:")
+console.log(numbers.reduce(getSum));
+console.log('------------------------------------');
+
+```
+- Provide examples of user defined reusable modules implemented in Node.js
+
+```javascript
+    function Person(name, age) {
+        var name = name;
+        var age = age;
+
+        return {
+            setName: function(value) {
+                name = value;
+            },
+            setAge: function(value) {
+                age = value;
+            },
+            getInfo: function() {
+                return {
+                    name: name,
+                    age: age
+                }
+            }
+        };
+    }
+
+    module.exports = Person;
