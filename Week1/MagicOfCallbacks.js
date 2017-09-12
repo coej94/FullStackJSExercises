@@ -29,15 +29,18 @@ console.log(UpperNames);
 /////////////////////////////////////////////////////////////////////////////////////
 
 //Exercise 2:
+//See full example in "week1/MagicOfCallbacks".
+
+//Official filter:
 let ofFilter = names.filter(name => name.length <= 3);
 
 //myFilter
-//We use the variable "names" from ex1.
+var names = ["Lars", "Jan", "Peter", "Bo", "Frederik", "Christian", "Ib", "Thomas"];
 function myFilter(array, callback) {
     var filteredArray = [];
-    array.forEach(function(info) {
-        if(callback(info)) {
-            filteredArray.push(info);
+    array.forEach(function(input) {
+        if(callback(input)) {
+            filteredArray.push(input);
         }
     });
     return filteredArray;

@@ -16,7 +16,7 @@ console.log('------------------------------------');
 console.log(numbers.fives);
 console.log('------------------------------------');
 
-//another way with the arrow Function. Arrow functions are now always gods gift to humanity.
+//another way with the arrow Function. Arrow functions are not always gods gift to humanity.
 //See "Arrow Confusion"
 function Numbers(numbs) {
     this.nums = numbs;
