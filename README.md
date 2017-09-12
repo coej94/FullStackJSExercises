@@ -303,3 +303,311 @@ console.log('------------------------------------');
     }
 
     module.exports = Person;
+```
+>## ES6-7 and TypeScript
+- Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, de-structuring assignments, maps/sets etc.
+## See week2 folder for exercise sheet - then the answers will make sense.
+### ArrowFunction =>
+```javascript
+let evens = [0,2,4,6,8];
+let odds = evens.map(v =>  v+1);
+
+console.log('------------------------------------');
+console.log(`Evens: ${evens}`);
+console.log(`Odds: ${odds}`);
+console.log('------------------------------------');
+```
+
+## ArrowFunction and This problem:
+```javascript
+//Exercise 3:
+// a)
+//One way with the old function
+function Numbers(numbs) {
+    this.nums = numbs;
+    this.fives = []; 
+    let hej = this;
+    this.nums.forEach(function(v){
+        if (v % 5 === 0) { 
+            hej.fives.push(v);
+        } 
+    });
+};
+var numbers = new Numbers([1,3,5,10,14,20,33,50]); 
+console.log('------------------------------------');
+console.log(numbers.fives);
+console.log('------------------------------------');
+
+//another way with the arrow Function. Arrow functions are not always gods gift to humanity.
+//See "Arrow Confusion"
+function Numbers(numbs) {
+    this.nums = numbs;
+    this.fives = []; 
+    this.nums.forEach((v) => {
+        if (v % 5 === 0) { 
+            this.fives.push(v);
+        } 
+    });
+};
+var numbers = new Numbers([1,3,5,10,14,20,33,50]); 
+console.log(numbers.fives);
+
+// b)
+//Function way
+console.log('------------------------------------');
+console.log(`Old fasioned function way`);
+console.log('------------------------------------');
+var counter = {
+    count: 0,
+    inc: function () {
+      this.count++;
+    }
+  }
+var func = counter.inc; //Store "reference" to inc
+func();
+console.log(`First result: ${counter.count}`); //Still zero
+counter.inc();
+console.log(`Second result: ${counter.count}`); //Now one
+
+
+// Arrow way
+console.log('------------------------------------');
+console.log(`Arrow function way`);
+console.log('------------------------------------');
+var counter = {
+    count: 0,
+    inc: () => {
+      this.count++;
+    }
+  }
+var func = counter.inc; //Store "reference" to inc
+func();
+console.log(`First result: ${counter.count}`); //Still zero
+counter.inc();
+console.log(`Second result: ${counter.count}`); //and still zero.
+
+```
+## Template iterals.
+```javascript
+var customer = { name: "Foo" }
+var card = { amount: 7, product: "Bar", unitprice: 42 }
+var message = `Hello ${customer.name},
+want to buy ${card.amount} ${card.product} for
+a total of ${card.amount * card.unitprice} bucks?`
+console.log('------------------------------------');
+console.log(message);
+console.log('------------------------------------');
+```
+
+## Rest operator
+```javascript
+console.log(`Exercise 5
+a)`);
+function f(x,y,...rest){ 
+    console.log(`sum: ${rest.length}`);
+    rest.forEach((item, index) => console.log(`rest value ${index+1} is a ${item.constructor.name}`));
+}
+console.log(f(5,2,true,2,"hello World",[1,2,3],new Date(),{}));
+
+console.log("b)");
+//To test it works!
+var rest = [true,2,"hello World",[1,2,3],new Date(),{}]; 
+var restParams = [ ...rest]; 
+console.log(f(5,2,...restParams));
+```
+
+## Shorthand notation:
+```javascript
+Shorthand notation
+console.log("exercise 6:");
+//Initializing
+let fName = "Kurt";
+let lName = "Wonnegut";
+let age = 98
+
+//this is easier to write instead of "this.fname = fname etc.."
+let man = {
+    fName: fName,
+    lName: lName,
+    age: age
+};
+
+//This line shows us the two ways we can acces the variables of our object.
+console.log('------------------------------------');
+console.log(`Mr. ${man['fName']} ${man.lName} is ${man.age} years old!`);  
+console.log('------------------------------------');
+```
+## Destructing assignment:
+```javascript
+  
+//a)
+let fName1 = "Kurt", lName1 = "Wonnegut";
+[fName1, lName1]=[lName1, fName1];
+
+console.log(`First: ${fName1}, Last: ${lName1}`);
+
+
+//b)
+function getPerson(){
+    return {
+      firstName: "Kurt",
+      lastName: "Wonnegut",
+      gender : "Male",
+      email: "kurt@wonnegut.dk",
+      phone: "12345",
+    }
+}
+//I'm stuck with this one - Moving further.
+let lastnameAndPhone = {lastName: getPerson["lastName"],phone: getPerson.phone}
+
+console.log('------------------------------------');
+console.log(lastnameAndPhone);
+console.log('------------------------------------');
+```
+
+- Explain and demonstrate how es2015 supports modules (import and export) similar to what is offered by NodeJS.
+Es2015 module import and export example:
+
+Export.
+```
+//------ lib.js ------
+    export const sqrt = Math.sqrt;
+    export function square(x) {
+        return x * x;
+    }
+    export function diag(x, y) {
+        return sqrt(square(x) + square(y));
+    }
+```
+Import.
+```
+//------ main.js ------
+    import { square, diag } from 'lib';
+    console.log(square(11)); // 121
+    console.log(diag(4, 3)); // 5
+```
+- Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
+En af de bedre ting ved ES6 er at det er blevet mere OO og er begyndt at ligne sprog som java på mange måder.
+
+Class definition.
+```
+class Shape {
+    constructor (id, x, y) {
+        this.id = id
+        this.move(x, y)
+    }
+    move (x, y) {
+        this.x = x
+        this.y = y
+    }
+}
+```
+Class inheritance.
+```
+class Rectangle extends Shape {
+    constructor (id, x, y, width, height) {
+        super(id, x, y)
+        this.width  = width
+        this.height = height
+    }
+}
+class Circle extends Shape {
+    constructor (id, x, y, radius) {
+        super(id, x, y)
+        this.radius = radius
+    }
+}
+```
+
+- Provide examples with es6, running in a browser, using Babel and Webpack
+- Provide an number of examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics
+
+```javascript
+//Initially we are defining the standards for a book using an interface.
+interface IBook {
+    title: string,
+    //This "readonly" thing makes the prop "private" which makes it impossible for
+    //me to change the name to bob as i'm trying to do in line 22.
+    readonly author: string, 
+    published?: Date, //The quotationmark makes the property optional.
+    pages?: number
+}
+
+//Then we are creating a book object.
+let howToSurvive = {
+    title: "How To survive FullStack Javascript", 
+    author: "Christian Øst-Jacobsen",
+    published: getDate(),
+    pages: 2000
+}
+//Creating a function which takes our IBook as an argument and logs a string,
+//with information about any book that follows our standard.
+function getBook(book: IBook){
+    //This line will fail because author is a readonly property.
+    //console.log( `The book ${book.title}, was written by ${book.author="bob"}, the ${book.published}, and has ${book.pages} pages.`);
+    console.log( `The book ${book.title}, was written by ${book.author}, the ${book.published}, and has ${book.pages} pages.`);
+    
+}
+//Then we call the function to get a result out in the console.
+getBook(howToSurvive);
+
+//Now we are creating a book class (THE JAVA WAY ☕️😈)
+class Book implements IBook{
+    title: string;
+    author: string; 
+    published: Date; //We are cheating a bit, as we dont want another Date error.
+    pages: number;
+
+    constructor(book_title: string, book_author: string, release_date: Date, total_pages: number){
+        this.title = book_title;
+        this.author = book_author;
+        this.published = release_date;
+        this.pages = total_pages;
+    }
+
+    book_info(): void {
+        console.log(`This book has ${this.pages} pages, is written by ${this.author}, is released: ${this.published} and its name is ${this.title}`);
+        
+    }
+}
+let Quack = new Book("QuackBook Pro", "Donald Quack", getDate(), 1234)
+
+Quack.book_info();
+//IT WORKS! We still have some problems with Date => String because we dont want
+//the ugly time format Date() gives us - else everything is just fine. 
+
+//This function gives us a clener format of the date of to day.
+//TS will complain because we are converting the date into a string, 
+//but the interface expects a Date. (No idea how to get the string back 
+//to date format again - Maybe we'll figure it out someday.)
+function getDate() {
+    var now = new Date();
+    var dd = now.getDate();
+    var mm = now.getMonth()+1; //January is 0!
+    var yyyy = now.getFullYear();
+    var today = dd+'/'+mm+'/'+yyyy;
+    return today
+}
+```
+Generics: 
+```javascript
+  // The <T> after the function name symbolizes that it's a generic function.
+  // When we call the function, every instance of T will be replaced with the actual provided type.
+
+ // Receives one argument of type T,
+ // Returns an array of type T.
+
+ function genericFunc<T>(argument: T): T[] {    
+    var arrayOfT: T[] = [];    // Create empty array of type T.
+    arrayOfT.push(argument);   // Push, now arrayOfT = [argument].
+    return arrayOfT;
+  }
+  
+  var arrayFromString = genericFunc<string>("beep");
+  console.log(arrayFromString[0]);         // "beep"
+  console.log(typeof arrayFromString[0])   // String
+  
+  var arrayFromNumber = genericFunc(42);
+  console.log(arrayFromNumber[0]);         // 42
+  console.log(typeof arrayFromNumber[0])   // number
+```
