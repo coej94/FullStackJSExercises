@@ -1,0 +1,20 @@
+{
+  "name": "expressexercises",
+  "version": "1.0.0",
+  "description": "express exercises",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
+  },
+  "scripts": {
+    "start": "node ./app.js",
+    "devstart": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian",
+  "license": "ISC"
+}
