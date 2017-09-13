@@ -4,6 +4,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var routes = require('./routes/index');
 
 var app = express();
 app.set('views', path.join(__dirname, 'views'));//Actually the default view folder
@@ -16,14 +17,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-
-app.get('/', function(req, res){
+app.use('/', routes);
+/*app.get('/', function(req, res){
   res.render('index', {title: 'Express'});
 });
-
-var names = [];
+*/
+var names = ['Christian']
 app.get('/form', function (req, res) {
-  res.send("Hi: "+names.join(",")+"<form method='post'><input name='name'></form>");
+  res.render('form', {names});
 });
 
 app.post('/form', function (req, res) {
@@ -40,23 +41,22 @@ app.post('/names', function (req, res) {
 
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
-  err.status = 404;
-  
+  err.status = 404; //<-- Why is this only used when in dev mode? What did i do wrong in ex. 9?
   next(err);  //Make sure you understand this line
 });
 // will print stacktrace
 if (app.get('env') === 'development')  {
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.send("<h1>Sorry there was a problem: " + err.message + "</h1><p>" + err.stack + "</p>");
+    res.render('error');
   
   });
 }
 //Will not print stacktrace
 app.use(function (err, req, res, next) {
-  throw new Error("UPPS");
+  throw new Error("UPPS"); //<--- Why is "status" undefined in my error.jade when this line is deleted?
   res.status(err.status || 500);
-  res.send("<h1>Sorry there was a problem: " + err.message + "</h1><p>" + err.message + "</p>")
+  res.render('error')
   
 });
 module.exports = app;
