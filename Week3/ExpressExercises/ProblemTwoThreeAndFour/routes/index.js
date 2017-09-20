@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', {'username': req.session.userName});
 });
 
-router.get('/joke', (req, res, next) => {
+router.get('/api/joke/random', (req, res, next) => {
   
   console.log('------------------------------------');
   console.log(getRandomJoke());
@@ -16,7 +16,7 @@ router.get('/joke', (req, res, next) => {
   return res.render('joke', {'rndJoke': getRandomJoke()});
 });
 
-router.get('/jokes', (req, res, next) => {
+router.get('/api/jokes', (req, res, next) => {
   
   console.log('------------------------------------');
   console.log(allJokes);
@@ -32,8 +32,8 @@ router.get('/addJoke', (req, res, next) => {
   res.render("addjoke");
 })
 
-router.post('/storeJoke', (req, res, next) => {
-  let joke = req.body.storeJoke;
+router.post('/api/joke', (req, res, next) => {
+  let joke = req.body.joke;
   addJoke(joke);
   req.session.storeJokeCount++;
   console.log(`JokeCount: ${req.session.jokeCount}`);
