@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    p add a joke:
+    form(action="/storeJoke", method="POST")
+        input(type="text", name="storeJoke")
+        input(type="submit", value="Submit")

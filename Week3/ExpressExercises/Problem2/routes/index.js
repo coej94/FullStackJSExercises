@@ -21,9 +21,16 @@ router.get('/jokes', (req, res, next) => {
   console.log('------------------------------------');
   return res.json(allJokes);
 })
-/* TO BE DONE TOMORROW
-router.post('/addJoke', (req, res, next) => {
-  addJoke()
+
+router.get('/addJoke', (req, res, next) => {
+  res.render("addjoke");
 })
-*/
+
+router.post('/storeJoke', (req, res, next) => {
+  let joke = req.body.storeJoke;
+  addJoke(joke);
+  res.redirect('/addJoke');
+  next();
+})
+
 module.exports = router;
