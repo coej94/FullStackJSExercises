@@ -3,7 +3,10 @@ var router = express.Router();
 var {allJokes, getRandomJoke, addJoke} = require('../model/jokes');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {'username': req.session.userName});
+  res.render('index', {'username': req.session.userName,
+                       'jokeCount': req.session.jokeCount,
+                       'jokesCount': req.session.jokeCount,
+                       'storeJokeCount': req.session.jokeCount});
 });
 
 router.get('/api/joke/random', (req, res, next) => {
@@ -37,6 +40,7 @@ router.post('/api/joke', (req, res, next) => {
   addJoke(joke);
   req.session.storeJokeCount++;
   console.log(`JokeCount: ${req.session.jokeCount}`);
+  req.session.storeJokeCount-1;
   res.redirect('/addJoke');
   next();
 })
