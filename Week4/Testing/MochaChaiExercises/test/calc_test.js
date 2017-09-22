@@ -1,7 +1,7 @@
 var calc = require("../lib/calculator.js");
 var {expect, assert} = require("chai");
 
-describe("calculator", () => {
+describe("Calculator", () => {
     describe("Devide()", ()=>{
         it("retuns 4 / 2 = 2", (done)=>{
             assert.equal(calc.div(4,2), 2);

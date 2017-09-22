@@ -25,6 +25,4 @@ describe("Tools", function(){
             });
         });
     });
-
-
 });
