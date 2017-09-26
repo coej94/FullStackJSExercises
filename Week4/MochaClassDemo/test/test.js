@@ -1,4 +1,5 @@
 var assert = require("assert"); //Use Nodes built in assertion libraty
+//Mocha without sugar or milk. ☕️
 describe('Array', function(){
   describe('#indexOf()', function(){
     it('should return -1 when value is not present', function(){

@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
     res.send(msg);    
 })
 app.use("/api/calculator/*", function (req, res, next) {
-    let result;
+    let result; // init result
     let arr = req.params[0].split('/');
     if (arr !== 3) next();
     var calcReq = {
@@ -21,7 +21,8 @@ app.use("/api/calculator/*", function (req, res, next) {
     }
     console.log(calcReq);
     if (calcReq.operation == 'add') {
-      result = `${calcReq.n1} + ${calcReq.n2} = ${calcReq.n1 + calcReq.n2}`;
+      result = `${calcReq.n1+calcReq.n2}`;
+      //result = `${calcReq.n1} + ${calcReq.n2} = ${calcReq.n1 + calcReq.n2}`;
     } else if(calcReq.operation == 'sub'){
         result = `${calcReq.n1} - ${calcReq.n2} = ${calcReq.n1 - calcReq.n2}`;
     } else if(calcReq.operation == 'mul'){
@@ -29,7 +30,7 @@ app.use("/api/calculator/*", function (req, res, next) {
     } else if(calcReq.operation == 'div'){
         result = `${calcReq.n1} / ${calcReq.n2} = ${calcReq.n1 / calcReq.n2}`;
     } else {
-        result = `Sorry.. but that is not an option 😂 `;
+        result = `Sorry.. but that is not an option 😂`;
     }
     res.send(result);
   });
