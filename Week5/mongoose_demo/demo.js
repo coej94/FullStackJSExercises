@@ -5,9 +5,9 @@ var User = require('./models/user');
 
 // create a new user called chris
 var chris = new User({
-  name: 'Chris',
-  username: 'sevilayha',
-  password: 'password' 
+  name: 'Staal',
+  username: 'n',
+  password: 'password3' 
 });
 
 // call the custom method. this will just add -dude to his name
@@ -17,6 +17,8 @@ chris.dudify(function(err, name) {
 
   console.log('Your new name is ' + name);
 });
+
+
 
 // call the built-in save method to save to the database
 chris.save(function(err) {
