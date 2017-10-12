@@ -4,6 +4,7 @@ import './styles/index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { ApolloProvider, createNetworkInterface, ApolloClient } from 'react-apollo'
+import { BrowserRouter } from 'react-router-dom'
 
 const networkInterface = createNetworkInterface({
     uri: 'https://api.graph.cool/simple/v1/cj8mpri1p0gzk01763e8cp31p'
@@ -15,7 +16,9 @@ const networkInterface = createNetworkInterface({
 
 
 ReactDOM.render(
+    <BrowserRouter>
     <ApolloProvider client={client}>
         <App />
-    </ApolloProvider>, document.getElementById('root'));
+    </ApolloProvider>
+    </BrowserRouter> , document.getElementById('root'));
 registerServiceWorker();
