@@ -1,27 +1,9 @@
 import React from 'react';
-import { Text, View, Platform, TouchableOpacity, StyleSheet, Button, WebView } from 'react-native';
+import { Text, View, Platform, TouchableOpacity, StyleSheet, } from 'react-native';
 import { Constants, WebBrowser } from "expo";
 import { StackNavigator } from 'react-navigation';
+import { WhatToDo, Basics, Props } from './components';
 
-//Todo: Refactor into a seperate file (Basics.js), import and complete the exercise
-class Basics extends React.Component {
-  static navigationOptions = { title: "Learn the Basics" }
-  render() {
-    return (<View><Text>Learn The Bacics</Text></View>)
-  }
-}
-
-//Todo: Refactor into a seperate file (Props.js), import and complete the exercise
-class Props extends React.Component {
-  static navigationOptions = { title: "Learn about Props" }
-  render() {
-    return (
-      <View>
-        <Text>Props</Text>
-      </View>
-    )
-  }
-}
 //Todo: Create a new file (State.js), import it, add a "Touchable", and complete the exercise
 //Todo: Create a new file (Style.js), import it, add a "Touchable", and complete the exercise
 //Todo: Create a new file (HeightWidth.js), import it,add a "Touchable", and complete the exercise
@@ -36,26 +18,8 @@ class Props extends React.Component {
 const Touchable = (props) => (
   <TouchableOpacity style={styles.button} onPress={props.onPress}>
     <Text style={styles.buttonText}>{props.title}</Text>
-  </TouchableOpacity>)
+  </TouchableOpacity>);
 
-//Todo: Refactor into a seperate file (WhatToDo.js), import and complete the exercise
-class WhatToDo extends React.Component {
-  static navigationOptions = { title: "What I have to do" }
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <Text style={{ marginBottom: 3 }}>Complete all steps in Facebooks "The Basics" tutorial (see below)</Text>
-        <Text style={{ marginBottom: 3 }}>For each of the 11 steps, add a corresponding Component in this project + the necessecary changes to navigate into it.
-        (inspired of how you navigated into this)
-      </Text>
-        <WebView
-          source={{ uri: "https://facebook.github.io/react-native/docs/tutorial.html" }}
-          style={{ marginTop: 20, flex: 1 }}
-        />
-      </View>
-    );
-  }
-}
 
 class HomeScreen extends React.Component {
   static navigationOptions = { title: 'Day1 Tutorial' };
@@ -68,11 +32,11 @@ class HomeScreen extends React.Component {
         <Touchable onPress={() => navigate('basics')} title="Basics" />
         <Touchable onPress={() => navigate('props')} title="Props" />
       </View>
-    )
+    );
   }
 }
 
-export default App = () => <RouteStack style={{ marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight / 2 }} />
+export default App = () => <RouteStack style={{ marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight / 2 }} />;
 
 const RouteStack = StackNavigator({
   Home: { screen: HomeScreen },
