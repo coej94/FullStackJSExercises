@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { Text } from 'react-native';
 
-class Basics extends React.Component {
+class Basics extends Component {
     static navigationOptions = { title: 'Learn the Basics' }
     render() {
-      return (<View><Text>Learn The Bacics</Text></View>);
+      return <Text>Hello World!</Text>;
     }
 }
 

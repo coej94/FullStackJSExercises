@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Platform, TouchableOpacity, StyleSheet, } from 'react-native';
 import { Constants, WebBrowser } from "expo";
 import { StackNavigator } from 'react-navigation';
-import { WhatToDo, Basics, Props } from './components';
+import { WhatToDo, Basics, Props, State } from './components';
 
 //Todo: Create a new file (State.js), import it, add a "Touchable", and complete the exercise
 //Todo: Create a new file (Style.js), import it, add a "Touchable", and complete the exercise
@@ -31,6 +31,7 @@ class HomeScreen extends React.Component {
         <Touchable onPress={() => navigate('web')} title="What I have to do" />
         <Touchable onPress={() => navigate('basics')} title="Basics" />
         <Touchable onPress={() => navigate('props')} title="Props" />
+        <Touchable onPress={() => navigate('states')} title="State" />
       </View>
     );
   }
@@ -43,6 +44,7 @@ const RouteStack = StackNavigator({
   basics: { screen: Basics },
   props: { screen: Props },
   web: { screen: WhatToDo },
+  states: { screen: State }, 
 });
 
 const styles = StyleSheet.create({

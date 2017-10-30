@@ -1,15 +1,16 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { Image } from 'react-native';
 
-class Props extends React.Component {
+class Props extends Component {
   static navigationOptions = { title: 'Learn about Props' }
-  render() {
-    return (
-      <View>
-        <Text>Props</Text>
-      </View>
-    );
-  }
+    render() {
+        const pic = {
+          uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+        };
+        return (
+          <Image source={pic} style={{width: 193, height: 110 }} />
+        );
+    }
 }
 
 export { Props };
