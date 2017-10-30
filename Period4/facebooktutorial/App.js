@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, Platform, TouchableOpacity, StyleSheet, } from 'react-native';
-import { Constants, WebBrowser } from "expo";
+import { Text, View, Platform } from 'react-native';
+import { Constants, WebBrowser } from 'expo';
 import { StackNavigator } from 'react-navigation';
-import { WhatToDo, Basics, Props, State } from './components';
+import { WhatToDo, Basics, Props, State, Style, 
+        Touchable, FixedDim, FlexDim, FlexBox } from './components';
 
-//Todo: Create a new file (State.js), import it, add a "Touchable", and complete the exercise
-//Todo: Create a new file (Style.js), import it, add a "Touchable", and complete the exercise
+//Todo: Create a new file (State.js), import it, add a "Touchable", and complete the exercise - done
+//Todo: Create a new file (Style.js), import it, add a "Touchable", and complete the exercise - done
 //Todo: Create a new file (HeightWidth.js), import it,add a "Touchable", and complete the exercise
 //Todo: Create a new file (HeightWidth.js), import it,add a "Touchable", and complete the exercise
 //Todo: Create a new file (FlexBox.js), import it,add a "Touchable", and complete the exercise
@@ -15,23 +16,22 @@ import { WhatToDo, Basics, Props, State } from './components';
 //Todo: Create a new file (ListViews.js), import it,add a "Touchable", and complete the exercise
 //Todo: Create a new file (NetWorking.js), import it,add a "Touchable", and complete the exercise
 
-const Touchable = (props) => (
-  <TouchableOpacity style={styles.button} onPress={props.onPress}>
-    <Text style={styles.buttonText}>{props.title}</Text>
-  </TouchableOpacity>);
-
-
 class HomeScreen extends React.Component {
   static navigationOptions = { title: 'Day1 Tutorial' };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View >
-        <Text style={{ textAlign: "center", fontSize: 20 }}>See all Demos implemented by XXXX</Text>
+        <Text style={{ textAlign: 'center', fontSize: 20 }}>See all Demos implemented by
+         Christian Øst-Jacobsen</Text>
         <Touchable onPress={() => navigate('web')} title="What I have to do" />
-        <Touchable onPress={() => navigate('basics')} title="Basics" />
-        <Touchable onPress={() => navigate('props')} title="Props" />
-        <Touchable onPress={() => navigate('states')} title="State" />
+        <Touchable onPress={() => navigate('basics')} title="Basics Exercise" />
+        <Touchable onPress={() => navigate('props')} title="Props Exercise" />
+        <Touchable onPress={() => navigate('states')} title="State Exercise" />
+        <Touchable onPress={() => navigate('styles')} title="Styling Exercise" />
+        <Touchable onPress={() => navigate('fixed')} title="Fixed Height & Width" />
+        <Touchable onPress={() => navigate('flex')} title="Same Ex but I use flex" />
+        <Touchable onPress={() => navigate('flexbox')} title="Flexbox Exercise" />
       </View>
     );
   }
@@ -44,19 +44,10 @@ const RouteStack = StackNavigator({
   basics: { screen: Basics },
   props: { screen: Props },
   web: { screen: WhatToDo },
-  states: { screen: State }, 
+  states: { screen: State },
+  styles: { screen: Style },
+  fixed: { screen: FixedDim },
+  flex: { screen: FlexDim },
+  flexbox: { screen: FlexBox },
 });
 
-const styles = StyleSheet.create({
-  button: {
-    margin: 3,
-    alignItems: 'center',
-    backgroundColor: '#2196F3'
-  },
-  buttonText: {
-    padding: 7,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: 'white'
-  }
-});

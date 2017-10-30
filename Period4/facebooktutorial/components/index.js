@@ -3,4 +3,8 @@ export * from './Basics';
 export * from './Props';
 export * from './State';
 export * from './Reusable/Blink';
-
+export * from './Style';
+export * from './Reusable/Touchable';
+export * from './FixedDim';
+export * from './FlexDim';
+export * from './Flexbox';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Blink } from './Reusable/Blink';
-/*
+/* ONLY ONE COMPONENT IN EACH FILE, PLEASE! 😠
 class Blink extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +24,7 @@ class Blink extends Component {
 }
 */
 class State extends Component {
+  static navigationOptions = { title: 'Who does not love this?' }
   render() {
     return (
       <View>
