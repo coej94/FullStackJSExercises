@@ -5,9 +5,6 @@ class FlexBox extends Component {
  static navigationOptions = { title: 'Playing with Flexbox Positions' }
   render() {
     return (
-      // Try setting `alignItems` to 'flex-start'
-      // Try setting `justifyContent` to `flex-end`.
-      // Try setting `flexDirection` to `row`.
       <View 
        style={{
         flex: 1,

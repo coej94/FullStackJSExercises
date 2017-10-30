@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 class FlexDim extends Component {
-    static navigationOptions = { title: 'With Flex Dimentions' }
+    static navigationOptions = { title: 'With Flex Dimentions' };
   render() {
     return (
       <View style={{ flex: 1 /* With a height of 300 flex only devides the 300 px.*/ }}> 

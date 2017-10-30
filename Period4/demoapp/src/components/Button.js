@@ -13,5 +13,8 @@ const Style = {
     button: {
         margin: 10,
         border: 1
+    },
+    hej: {
+        
     }
 };
