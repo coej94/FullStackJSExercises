@@ -15,3 +15,5 @@ export * from './Scrolling';
 export * from './FlatListBasics';
 export * from './SectionListBasics';
 export * from './Networking';
+export * from './MapViewer';
+
