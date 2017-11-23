@@ -11,7 +11,7 @@ function myPromise(msg, delay) {
             }
         }, delay);
     });
-}
+};
 
 //Sequence promise
 const p1 = new myPromise("Hi Christian", 1000);

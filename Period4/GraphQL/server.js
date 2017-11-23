@@ -1,16 +1,16 @@
 const express = require('express')
 const expressGraphQL = require('express-graphql');
-const scema = require('./schema/schema')
+const schema = require('./schema/schema');
 
 const app = express()
 
 
 
-app.get('/graphiql',  {
+app.use('/graphql', expressGraphQL({
     schema,
     graphiql: true
-})
+}));
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(4000, function () {
+  console.log('Example app listening on port 4000!')
 });
