@@ -1,0 +1,15 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "dependencies": {
+    "expo": "^22.0.0",
+    "react": "16.0.0-beta.5",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-22.0.2.tar.gz",
+    "react-native-maps": "^0.17.1",
+    "react-native-modal": "^4.1.1"
+  },
+  "name": "friendfinderfrontend",
+  "version": "0.0.0",
+  "description": "Virker ikke helt efter hensigten",
+  "author": null
+}
