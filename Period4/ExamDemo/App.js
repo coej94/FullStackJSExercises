@@ -5,7 +5,8 @@ import { StackNavigator } from 'react-navigation';
 import { WhatToDo, Basics, Props, State, Style, 
           Touchable, FixedDim, FlexDim, FlexBox, PizzaTranslator, 
            ButtonBasics, TouchableBasics, Scrolling, 
-           FlatListBasics, SectionListBasics, Networking, MapViewer } from './components';
+           FlatListBasics, SectionListBasics, Networking, MapViewer, Camera } from './components';
+import { CameraExample } from './components/Camera';
 
 class HomeScreen extends Component {
   static navigationOptions = { title: 'Day1 Tutorial' };
@@ -31,6 +32,7 @@ class HomeScreen extends Component {
         <Touchable onPress={() => navigate('sectionlist')} title="Section List Exercise" />
         <Touchable onPress={() => navigate('networking')} title="Networking" />
         <Touchable onPress={() => navigate('map')} title="MapView Demo" />
+        <Touchable onPress={() => navigate('camera')} title="CameraDemo" />        
       </ScrollView>
     );
   }
@@ -55,7 +57,8 @@ const RouteStack = StackNavigator({
   flatlist: { screen: FlatListBasics },
   sectionlist: { screen: SectionListBasics },
   networking: { screen: Networking },
-  map: { screen: MapViewer }
+  map: { screen: MapViewer },
+  camera: { screen: CameraExample }  
 });
 
 //Completed, all of them.
