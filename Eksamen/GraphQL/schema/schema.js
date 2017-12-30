@@ -1,5 +1,7 @@
 const graphql = require('graphql');
 const axios = require('axios');
+
+// To use GraphQL methods we need to define them in a constant
 const {
     GraphQLObjectType,
     GraphQLString,
@@ -8,6 +10,7 @@ const {
     GraphQLList,
     GraphQLNonNull
 } = graphql;
+
 
 const CompanyType = new GraphQLObjectType({
     name: 'Company',
@@ -25,6 +28,8 @@ const CompanyType = new GraphQLObjectType({
     })
 });
 
+// We define a Type with the name User, in fields we define what parameters
+// our ObjectType has
 const UserType = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
@@ -42,13 +47,17 @@ const UserType = new GraphQLObjectType({
     })
 });
 
+// Here we define our query, which take the id from our user ObjectType and 
+// resolve it whith the get request from our backend. 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
         user: {
             type: UserType,
             args: { id: {type: GraphQLString} },
+            // resolve crawls over the schemas, and looks for the first node with the given argument
             resolve(parentValue, args) {
+                // We use axios instead of fetch, because its simpler.
                 return axios.get(`http://localhost:3000/users/${args.id}`)
                 .then(res => res.data)
             }
@@ -106,6 +115,7 @@ const mutation = new GraphQLObjectType({
     }
 })
 
+//then we create our schema and tell which queries we have in our shcema
 module.exports = new GraphQLSchema({
     query: RootQuery,
     mutation
