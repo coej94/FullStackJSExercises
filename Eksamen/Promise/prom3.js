@@ -6,6 +6,14 @@ function getCoffee() {
   });
 }
 
+function getCoffee2() {
+  return new Promise(resolve => {
+    setTimeout(function() { 
+      resolve('☕')
+    }, 2000); // it takes 2 seconds to make coffee
+  });
+}
+
 async function go() {
   try {
     // but first, coffee

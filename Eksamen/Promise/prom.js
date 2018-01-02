@@ -37,14 +37,14 @@ p1.then((data) => {
 
 // parallel promises
 // alle bliver kørt samtidigt
-function parallel(){
+function async parallel(){
     const p1 = new myPromise("hi class 1", 1000);
     const p2 = new myPromise("hi class 2", 1000);
     const p3 = new myPromise("hi class 3", 1000);
     const p4 = new myPromise("hi class 4", 1000);
 
-    let allP = [p1, p2, p3, p4];
-    Promise.all(allP)
+    let  allP = [p1, p2, p3, p4];
+    await Promise.all(allP)
     .then(all => {
         console.log(all.join("`\n"));
     })
