@@ -17,11 +17,11 @@ function getCoffee2() {
 async function go() {
   try {
     // but first, coffee
-    const coffee = await getCoffee();
+    const coffee = await getCoffee2();
     console.log(coffee); // ☕
     // then we grab some data over an Ajax request
-    const christiansdata = await axios('http://localhost:7777/jstores')
-    .then(res => res.data); 
+    const christiansdata = await axios.get('http://api.icndb.com/jokes/random')
+    .then(res => res.data.value.joke); 
     console.log(christiansdata);
   } catch (e) {
     console.error(e); // 💩
